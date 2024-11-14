@@ -8,6 +8,11 @@ class CourseCreateView(generics.CreateAPIView):
     serializer_class = CourseSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def perform_create(self, serializer):
+        # Set the `admin` field to the authenticated user
+        serializer.save(admin=self.request.user)
+
+
 class ScheduledCourseListView(generics.ListAPIView):
     serializer_class = CourseSerializer
     permission_classes = [permissions.IsAuthenticated]
