@@ -19,3 +19,8 @@ class ScheduledCourseListView(generics.ListAPIView):
 
     def get_queryset(self):
         return Course.objects.filter(publish_date__lte=timezone.now())
+
+class AllCoursesView(generics.ListAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    permission_classes = [permissions.IsAuthenticated]
